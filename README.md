@@ -47,6 +47,7 @@ stack build
 ```
 Or, if using Nix:
 ```
+nix develop
 stack build --nix
 ```
 
@@ -59,6 +60,7 @@ stack run vc ../out/peano.yul
 ```
 Or, if using Nix:
 ```
+nix develop
 stack run vc ../out/peano.yul --nix
 ```
 
