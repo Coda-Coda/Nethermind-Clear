@@ -16,7 +16,7 @@ Please note this is an *unofficial* version of the [NethermindEth/Clear](https:/
 
 For general information about GitHub Codespaces, please see: https://github.com/features/codespaces.
 
-This setup makes use of the Nix Package manager, see https://nixos.org for more information.
+This setup makes use of the Nix package manager, see https://nixos.org for more information.
 
 ------------------
 
@@ -45,6 +45,10 @@ Then simply run the following in the `vc` directory:
 ```
 stack build
 ```
+Or, if using Nix:
+```
+stack build --nix
+```
 
 ## Verifying it all works
 *Note: this step is __NOT__ done automatically in the setup of a GitHub Codespace.*
@@ -52,6 +56,10 @@ stack build
 In the `vc` directory, run:
 ```
 stack run vc ../out/peano.yul
+```
+Or, if using Nix:
+```
+stack run vc ../out/peano.yul --nix
 ```
 
 You should get a `Generated` folder corresponding with the structure of the Peano example
