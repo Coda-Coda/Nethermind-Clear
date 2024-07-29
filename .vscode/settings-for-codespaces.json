@@ -1,0 +1,5 @@
+{
+    "lean4.envPathExtensions": [
+        "/nix/store/al4r89gnb0snq83mjfiq4kzbv3gbp2kn-lean4-4.7.0/bin/"
+    ]
+}
