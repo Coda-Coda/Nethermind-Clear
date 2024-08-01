@@ -17,7 +17,7 @@
   "containerEnv": {
   },
 
-  "onCreateCommand": "nix develop --command bash -c \"cp .vscode/settings-for-codespaces.json .vscode/settings.json; lake build; cd vc; stack build --nix; echo 'Done getting dependencies and initial setup and using lake and stack!'\"",
+  "onCreateCommand": "nix develop --accept-flake-config --command bash -c \"cp .vscode/settings-for-codespaces.json .vscode/settings.json; lake build; cd vc; stack build --nix; echo 'Done getting dependencies and initial setup and using lake and stack!'\"",
 
   "overrideCommand": false,
   "userEnvProbe": "loginShell",
