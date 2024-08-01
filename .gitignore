@@ -2,3 +2,5 @@
 .lake/
 vc/.stack-work/*
 .vscode/settings.json
+dev-profile
+dev-profile-*
