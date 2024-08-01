@@ -35,6 +35,11 @@ Then simply run the following in the root directory:
 ```
 lake build
 ```
+Or, if using Nix:
+```
+nix develop # Accept the prompts to use a cached version of lean v4.9.1 rather than building it from source
+lake build
+```
 
 ## The verification condition generator (vc)
 *Note: this step is done automatically in the setup of a GitHub Codespace.*
@@ -47,7 +52,7 @@ stack build
 ```
 Or, if using Nix:
 ```
-nix develop
+nix develop # Accept the prompts to use a cached version of lean v4.9.1 rather than building it from source
 stack build --nix
 ```
 
@@ -60,7 +65,7 @@ stack run vc ../out/peano.yul
 ```
 Or, if using Nix:
 ```
-nix develop
+nix develop # Accept the prompts to use a cached version of lean v4.9.1 rather than building it from source
 stack run vc ../out/peano.yul --nix
 ```
 
