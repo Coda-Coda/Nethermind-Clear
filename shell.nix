@@ -1,9 +1,9 @@
 # Based on https://nixos.wiki/wiki/Flakes, used under the MIT license.
-{ pkgs ? import <nixpkgs> { } }:
+{ pkgs, pkgs-lean }:
 with pkgs;
 mkShell {
   buildInputs = [
-    lean4
+    pkgs-lean.lean4
     stack
   ];
 }
