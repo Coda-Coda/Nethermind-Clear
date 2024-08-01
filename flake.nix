@@ -3,7 +3,7 @@
   description = "Nethermind Clear";
 
   inputs.flake-utils.url = "github:numtide/flake-utils";
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+  inputs.nixpkgs.url = "github:Coda-Coda/nixpkgs/update-lean4-to-v4.10.0";
 
   outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem
