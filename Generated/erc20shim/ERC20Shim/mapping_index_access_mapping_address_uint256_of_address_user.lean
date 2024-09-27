@@ -108,6 +108,12 @@ lemma EVMAddrSize' {s : State} : (s, [Fin.shiftLeft 1 160]) = (s, [Address.size.
   simp
   exact shift_eq_size
 
+lemma mstore_preserves_keccak_map {evm' : EVM} {spos : UInt256} {sval : UInt256} :
+  (mstore evm' spos sval).keccak_map = evm'.keccak_map := by
+  unfold mstore
+  unfold updateMemory
+  simp
+
 lemma mapping_index_access_mapping_address_uint256_of_address_abs_of_concrete {s₀ s₉ : State} {dataSlot slot key} :
   Spec (mapping_index_access_mapping_address_uint256_of_address_concrete_of_code.1 dataSlot slot key) s₀ s₉ →
   Spec (A_mapping_index_access_mapping_address_uint256_of_address dataSlot slot key) s₀ s₉ := by
@@ -145,10 +151,11 @@ lemma mapping_index_access_mapping_address_uint256_of_address_abs_of_concrete {s
        , interval_of_0_eq_nil
        ]
     unfold_let
+    rw [mstore_preserves_keccak_map, mstore_preserves_keccak_map]
     rw [hasAddress]
 
 
-  sorry
+    sorry
 -- mkInterval (mstore evm x v) x = v :: (mkInterval evm (x + 32))
   -- mkInterval evm n n = []
   --   rw [ ← prep_def ]
