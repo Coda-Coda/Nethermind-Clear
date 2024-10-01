@@ -17,6 +17,9 @@ instance : NeZero UInt256.size := ⟨by decide⟩
 
 abbrev UInt256 := Fin UInt256.size
 
+instance : SizeOf UInt256 where
+  sizeOf := 1
+
 instance (n : ℕ) : OfNat UInt256 n := ⟨Fin.ofNat n⟩
 instance : Inhabited UInt256 := ⟨0⟩
 instance : NatCast UInt256 := ⟨Fin.ofNat⟩
