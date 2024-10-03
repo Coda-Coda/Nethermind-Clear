@@ -114,7 +114,8 @@ lemma preservesEvm_of_isOk {s₀ s₁ : State} :
   s₀.isOk → s₁.isOk → preservesEvm s₀ s₁ →
   (s₀.evm.account_map = s₁.evm.account_map ∧
   s₀.evm.hash_collision = s₁.evm.hash_collision ∧
-  s₀.evm.execution_env = s₁.evm.execution_env) := by
+  s₀.evm.execution_env = s₁.evm.execution_env ∧
+  s₀.evm.keccak_map = s₁.evm.keccak_map) := by
   unfold isOk preservesEvm
   cases s₀ <;> cases s₁ <;> simp
   rw [preserved_def]

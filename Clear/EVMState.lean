@@ -417,27 +417,34 @@ abbrev EVM := EVMState
 def preserved : EVMState → EVMState → Prop :=
   (Eq on EVMState.account_map) ∩
   (Eq on EVMState.hash_collision) ∩
-  (Eq on EVMState.execution_env)
+  (Eq on EVMState.execution_env) ∩
+  (Eq on EVMState.keccak_map)
 
 def preserves_account_map :
   {evm evm' : EVMState} → preserved evm evm' → evm.account_map = evm'.account_map := by
   intro evm evm' h
-  exact h.1.1
+  exact h.1.1.1
 
 def preserves_collision :
   {evm evm' : EVMState} → preserved evm evm' → evm.hash_collision = evm'.hash_collision := by
   intro _ _ h
-  exact h.1.2
+  exact h.1.1.2
 
 def preserves_execution_env :
   {evm evm' : EVMState} → preserved evm evm' → evm.execution_env = evm'.execution_env := by
   intro _ _ h
+  exact h.1.2
+
+def preserves_keccak_map :
+  {evm evm' : EVMState} → preserved evm evm' → evm.keccak_map = evm'.keccak_map := by
+  intro evm evm' h
   exact h.2
 
 lemma preserved_def {e₀ e₁ : EVM} : preserved e₀ e₁ =
   (e₀.account_map = e₁.account_map ∧
   e₀.hash_collision = e₁.hash_collision ∧
-  e₀.execution_env = e₁.execution_env) := by
+  e₀.execution_env = e₁.execution_env ∧
+  e₀.keccak_map = e₁.keccak_map)  := by
   unfold preserved
   dsimp [(· ∩ ·)]
   simp [Function.onFun, and_assoc]
@@ -452,9 +459,9 @@ lemma preserved_symm {e₀ e₁ : EVM} : preserved e₀ e₁ = preserved e₁ e�
   rw [preserved_def, preserved_def]
   ext
   apply Iff.intro <;> {
-    intro ⟨acc, col, env⟩
-    symm at acc col env
-    exact ⟨acc, col, env⟩
+    intro ⟨acc, col, env, kec⟩
+    symm at acc col env kec
+    exact ⟨acc, col, env, kec⟩
   }
 
 @[simp]
@@ -466,6 +473,8 @@ lemma preserved_trans {e₀ e₁ e₂ : EVM} :
   have acc := Eq.trans (preserves_account_map h₀) (preserves_account_map h₁)
   have col := Eq.trans (preserves_collision h₀) (preserves_collision h₁)
   have env := Eq.trans (preserves_execution_env h₀) (preserves_execution_env h₁)
+  have kec := Eq.trans (preserves_keccak_map h₀) (preserves_keccak_map h₁)
+  apply And.intro
   apply And.intro
   apply And.intro
   all_goals assumption
