@@ -49,7 +49,14 @@ lemma mapping_index_access_mapping_address_mapping_address_uint256_of_address_ab
 
   rw [← prog]
   unfold State.lookup!
-  simp
+
+  apply And.intro
+  · apply preservesEvm_eq
+    simp
+    apply preserved_trans (e₁ := mstore evm 0 ↑↑account)
+    · exact mstore_preserves
+    · exact mstore_preserves
+  · simp
 
 end
 
