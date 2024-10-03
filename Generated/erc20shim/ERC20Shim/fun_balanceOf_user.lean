@@ -34,8 +34,11 @@ lemma fun_balanceOf_abs_of_concrete {s₀ s₉ : State} {var var_account} :
   unfold A_mapping_index_access_mapping_address_uint256_of_address at keccak
   simp at keccak
   clr_spec at keccak
-  
-  obtain ⟨preserves, is_ok, lookup⟩ := keccak hasBal bal_addr hasAddr
+
+  let dummy_map : AddressMap :=  (∅ : AddressMap).insert (Address.ofUInt256 var_account) 1
+  have h_dummy_map : (Address.ofUInt256 var_account) ∈ dummy_map := by aesop
+
+  obtain ⟨preserves, is_ok, lookup⟩ := keccak h_dummy_map bal_addr hasAddr
   obtain ⟨evmₛ, varstareₛ, ok_state⟩ := State_of_isOk is_ok
   rw [lookup, ok_state] at prog
   rw [← prog]
