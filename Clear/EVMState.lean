@@ -6,6 +6,8 @@ import Clear.UInt256
 
 open Clear Instr UInt256
 
+#check ℕ
+
 def Array.extractFill {A : Type} [Zero A] (v₀ size : ℕ) (arr : Array A) : Array A :=
   let return_size := v₀ + size - 1
   if arr.size < return_size
