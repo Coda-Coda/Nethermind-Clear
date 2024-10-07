@@ -21,12 +21,12 @@ jobs:
         uses: actions/cache@v4.1.0
         with:
           path: ~/.elan/toolchains
-          key: ${{ runner.os }}-lean-toolchain-${{ hashFiles('$GITHUB_WORKSPACE/lean-toolchain') }}
+          key: ${{ runner.os }}-lean-toolchain-${{ hashFiles('lean-toolchain') }}
       - name: Cache Lean Packages
         uses: actions/cache@v4.1.0
         with:
           path: .lake/packages
-          key: ${{ runner.os }}-lean-packages-${{ hashFiles('$GITHUB_WORKSPACE/lake-manifest.json') }}
+          key: ${{ runner.os }}-lean-packages-${{ hashFiles('lake-manifest.json') }}
       - name: Build vc tool
         run: nix develop --command bash -c "cd vc; stack --nix build"
       - name: Build Lean files
