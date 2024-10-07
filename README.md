@@ -5,7 +5,7 @@
 ## GitHub Codespaces instructions (added by Daniel)
 *Before use ensure your usage is permitted by the [license](./LICENSE.MD).*
 
-Please note this is an *unofficial* version of the [NethermindEth/Clear](https://github.com/NethermindEth/Clear) repository, the only changes are related to adding support for GitHub Codespaces and making the dependencies available when using the [Nix package manager](https://nixos.org).
+Please note this is an *unofficial* version of the [NethermindEth/Clear](https://github.com/NethermindEth/Clear) repository, the only changes in this branch are related to adding support for GitHub Codespaces and making the dependencies available when using the [Nix package manager](https://nixos.org).
 
 *Note: Codespaces have free quotas but are not free in general, for more information see [here](https://docs.github.com/en/billing/managing-billing-for-github-codespaces/about-billing-for-github-codespaces).*
 
