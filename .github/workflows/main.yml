@@ -1,0 +1,35 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4.2.0
+      - name: The Determinate Nix Installer
+        uses: DeterminateSystems/nix-installer-action@v14
+      - name: Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@v8
+      - name: Cache Lean Toolchains
+        uses: actions/cache@v4.1.0
+        with:
+          path: ~/.elan/toolchains
+          key: ${{ runner.os }}-lean-toolchain-${{ hashFiles('$GITHUB_WORKSPACE/lean-toolchain') }}
+      - name: Cache Lean Packages
+        uses: actions/cache@v4.1.0
+        with:
+          path: .lake/packages
+          key: ${{ runner.os }}-lean-packages-${{ hashFiles('$GITHUB_WORKSPACE/lake-manifest.json') }}
+      - uses: nicknovitski/nix-develop@v1
+      - name: Build Lean files
+        run: lake build
+      - name: Build vc tool
+        run: cd vc; stack --nix build
