@@ -27,8 +27,8 @@ jobs:
         with:
           path: .lake/packages
           key: ${{ runner.os }}-lean-packages-${{ hashFiles('$GITHUB_WORKSPACE/lake-manifest.json') }}
-      - uses: nicknovitski/nix-develop@v1
-      - name: Build Lean files
-        run: lake build
       - name: Build vc tool
-        run: cd vc; stack --nix build
+        run: nix develop --command bash -c "cd vc; stack --nix build"
+      - name: Build Lean files
+        run: nix develop --command bash -c "lake build"
+            
